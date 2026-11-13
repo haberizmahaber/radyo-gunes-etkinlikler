@@ -117,6 +117,18 @@ def best_image(p,url):
             return candidate
     return ''
 
+def inegol_event_image(p,url):
+    """Use only event-specific imagery; never reuse municipality-wide OG banners."""
+    if not p:return ''
+    for src,alt in p.images:
+        candidate=image_url(src,url)
+        if not candidate:continue
+        path=urlparse(candidate).path.lower()
+        if re.search(r'logo|icon|avatar|banner|social|placeholder|default|belediye',src+' '+alt,re.I):continue
+        if re.search(r'\.(?:jpe?g|png|webp)$',path) and (re.search(r'afiş|afis|poster|tiyatro|konser',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/',path,re.I)):
+            return candidate
+    return ''
+
 def bursa_date(s):
     # Listing dates: 10.11.2026 - 17.11.2026 or 14.11.2026
     m=re.search(r'(?<!\d)(\d{2})\.(\d{2})\.(20\d{2})(?:\s*[-–]\s*(\d{2})\.(\d{2})\.(20\d{2}))?',s)
@@ -196,7 +208,7 @@ def collect():
                     og=clean(detail.meta.get('og:title')) if detail else '' 
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
-                if add(make(title,start,url,source,category,district='İnegöl',image=best_image(detail,url) if 'detail' in locals() and detail else '')):accepted+=1
+                if add(make(title,start,url,source,category,district='İnegöl',image=inegol_event_image(detail,url) if detail else '')):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
                 start,end=bursa_date(card.get('text',''))
@@ -239,6 +251,14 @@ if __name__=='__main__':
                 if d and (d>=dt.datetime.now(TZ)-dt.timedelta(days=1) or (parse_iso(e.get('end')) and parse_iso(e.get('end'))>=dt.datetime.now(TZ))) and e.get('id') not in existing and e.get('url','').startswith('https://'):
                     events.append(e);existing.add(e['id'])
         except (ValueError,TypeError,KeyError):pass
+    # A generic İnegöl banner must not appear as the poster for several events.
+    image_counts={}
+    for e in events:
+        if e.get('district')=='İnegöl' and e.get('image'):
+            image_counts[e['image']]=image_counts.get(e['image'],0)+1
+    for e in events:
+        if e.get('district')=='İnegöl' and e.get('image') and image_counts[e['image']]>1:
+            e['image']=''
     events.sort(key=lambda x:x['start'])
     out.write_text(json.dumps({'updated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'events':events},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('Saved',len(events),'events')
