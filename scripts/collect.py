@@ -30,10 +30,21 @@ class Parser(HTMLParser):
         if tag not in ('img','meta','input','br','hr','link','source','area','embed','wbr'):
             for card in self.stack: card['depth']+=1
         if tag=='img':
-            src=a.get('data-src') or a.get('data-original') or a.get('src') or ''
+            src=a.get('data-src') or a.get('data-original') or a.get('data-lazy-src') or a.get('data-image') or a.get('src') or ''
+            if not src:
+                srcset=a.get('data-srcset') or a.get('srcset') or ''
+                src=srcset.split(',')[0].strip().split(' ')[0] if srcset else ''
             if src:
                 self.images.append((src,clean(a.get('alt',''))))
                 for card in self.stack:card['images'].append((src,clean(a.get('alt',''))))
+        # Capture background images used by municipal event cards.
+        if tag in ('div','a','picture','figure'):
+            style=a.get('style','')
+            bg=re.search(r'background(?:-image)?\s*:\s*url\([\"\']?([^\)\"\']+)',style,re.I)
+            src=a.get('data-background') or a.get('data-bg') or (bg.group(1) if bg else '')
+            if src:
+                self.images.append((src,''))
+                for card in self.stack:card['images'].append((src,''))
         if tag=='a' and a.get('href'):
             for card in self.stack:card['links'].append(a['href'])
         if tag=='a' and a.get('href') and self.link is None: self.link=a['href']; self.text=[]
@@ -130,7 +141,7 @@ def inegol_event_image(p,url,listing_images=None):
         if not candidate or bad.search(src+' '+alt):continue
         path=urlparse(candidate).path.lower()
         if not re.search(r'\.(?:jpe?g|png|webp)$',path):continue
-        if re.search(r'afiş|afis|poster|tiyatro|konser|etkinlik|oyun|kültür|kultur',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/|/uploads/|/images/etkinlik',path,re.I):
+        if re.search(r'afiş|afis|poster|tiyatro|konser|etkinlik|oyun|kültür|kultur',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/|/uploads/|/images/etkinlik|/storage/|/medya/',path,re.I):
             return candidate
     return ''
 
