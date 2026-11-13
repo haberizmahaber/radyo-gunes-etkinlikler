@@ -1,4 +1,49 @@
 {
-  "updated_at": "2026-11-13T10:21:00.616339+00:00",
-  "events": []
+  "updated_at": "2026-11-13T10:26:14.155618+00:00",
+  "events": [
+    {
+      "id": "743109afcd83942aa70b",
+      "title": "İnegöl Belediyesi Şehir Tiyatrosu Son Durak Yetişkin Tiyatro Oyunu ÜCRETSİZ BİLETLİ Beşinci Mevsim Kültür Sanat Merkezi",
+      "start": "2026-11-12T20:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-son-durak-yetiskin-tiyatro-oyunu-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler"
+    },
+    {
+      "id": "8f15cfd712d7a0ae754d",
+      "title": "Bir Parça Peynir Çocuk Tiyatro Oyunu 5 - 12 Yaş ÜCRETSİZ BİLETLİ Beşinci Mevsim Kültür Sanat Merkezi",
+      "start": "2026-11-14T14:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/bir-parca-peynir-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler"
+    },
+    {
+      "id": "10fbf4aea2dda5bb87c8",
+      "title": "İnegöl Belediyesi Şehir Tiyatrosu İki Bavul Dolusu Çocuk Tiyatro Oyunu 5-12 Yaş Ücretsiz Biletli Beşinci Mevsim Kültür Sanat Merkezi",
+      "start": "2026-11-21T14:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-iki-bavul-dolusu-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler"
+    },
+    {
+      "id": "8b15901fc18a3945c148",
+      "title": "İnegöl Belediyesi Şehir Tiyatrosu ''Kadın Sığınağı'' Yetişkin Tiyatro Oyunu ÜCRETSİZ BİLETLİ +13 Beşinci Mevsim Kültür Sanat Merkezi",
+      "start": "2026-11-25T20:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13",
+      "source": "https://www.inegol.bel.tr/etkinlikler"
+    }
+  ]
 }
