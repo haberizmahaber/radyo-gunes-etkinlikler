@@ -1,6 +1,188 @@
 {
-  "updated_at": "2026-11-13T10:26:14.155618+00:00",
+  "updated_at": "2026-11-13T13:19:24.143777+00:00",
   "events": [
+    {
+      "id": "46b8bdd4ca81f2a43482",
+      "title": "Bursa'nın Fethi'nin 700. Yılı Etkinlik Programı",
+      "start": "2026-01-27T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursanin-fethinin-700-yili-etkinlik-programi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/fwz029udm6o8080.jpg",
+      "end": "2026-12-31T23:59:00+03:00"
+    },
+    {
+      "id": "ea1f0eba569347f5d6ce",
+      "title": "Geleceği Dokuyan Fabrika Merinos",
+      "start": "2026-02-02T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Sergi",
+      "url": "https://www.bursa.bel.tr/etkinlik/gelecegi-dokuyan-fabrika-merinos",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/3sq3tlvzrsis08.jpg",
+      "end": "2027-02-02T23:59:00+03:00"
+    },
+    {
+      "id": "523b82ce663a543cf301",
+      "title": "Hünkâr Köşkü’nde Zamanın Tanıkları",
+      "start": "2026-07-17T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Sergi",
+      "url": "https://www.bursa.bel.tr/etkinlik/hunkar-koskunde-zamanin-taniklari-2",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/4tsaj8aencw0ggc.jpeg",
+      "end": "2027-07-17T23:59:00+03:00"
+    },
+    {
+      "id": "eac51a3db4c8af29bab0",
+      "title": "Bursa Felsefe Buluşmaları",
+      "start": "2026-10-10T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursa-felsefe-bulusmalari",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/g986p9xppb4k48g.jpg",
+      "end": "2027-05-08T23:59:00+03:00"
+    },
+    {
+      "id": "b8feb7a09214ff0e3667",
+      "title": "Bursa Oda Orkestrası Sanatçılarını Arıyor",
+      "start": "2026-10-15T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursa-oda-orkestrasi-sanatcilarini-ariyor",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/15sisucxk0iook4.jpg",
+      "end": "2026-11-17T23:59:00+03:00"
+    },
+    {
+      "id": "c79f5d7b8c9b24938ad1",
+      "title": "YEKPARE Hendesî Desen ve Ebru Sergisi",
+      "start": "2026-10-27T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Sergi",
+      "url": "https://www.bursa.bel.tr/etkinlik/yekpare-hendesi-desen-ve-ebru-sergisi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/10/01M5YAXCTAGV2ACDXG4HNQ1AF9.jpeg",
+      "end": "2026-11-15T23:59:00+03:00"
+    },
+    {
+      "id": "3164b96d7975d53a7f86",
+      "title": "Bursa’nın Cumhuriyet Albümü: Bir Kentin Ortak Hafızası” fotoğraf sergisi",
+      "start": "2026-10-28T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Sergi",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursanin-cumhuriyet-albumu-bir-kentin-ortak-hafizasi-fotograf-sergisi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/10/01M6390GJSFKXZXR099A2YNWEV.jpg",
+      "end": "2026-12-13T23:59:00+03:00"
+    },
+    {
+      "id": "331c25c54852068bfe99",
+      "title": "Bakarsan Cumhuriyeti Görürsün",
+      "start": "2026-10-29T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Sergi",
+      "url": "https://www.bursa.bel.tr/etkinlik/bakarsan-cumhuriyeti-gorursun",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/ux3t6u8m928ko4.jpg",
+      "end": "2026-12-31T23:59:00+03:00"
+    },
+    {
+      "id": "9b21ff62d89ee5ce6a8e",
+      "title": "Kasım Ayı Etkinlik Takvimi",
+      "start": "2026-11-01T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/kasim-ayi-etkinlik-takvimi-2",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6E664N237Y0RJ4M9QWWF1JW.jpeg",
+      "end": "2026-12-01T23:59:00+03:00"
+    },
+    {
+      "id": "e635c83d1240b2459371",
+      "title": "AKTOPRAKLIK ARKEOLOJİ SÖYLEŞİLERİ – 8",
+      "start": "2026-11-05T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/aktopraklik-arkeoloji-soylesileri-8",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NT71SN5GYAKD7MJJSG0FRF.jpeg",
+      "end": "2026-11-15T23:59:00+03:00"
+    },
+    {
+      "id": "9c684339fabd96149737",
+      "title": "AHISKA TÜRKLERİ SÜRGÜNÜNÜN 82. YILI ANMA PROGRAMI",
+      "start": "2026-11-05T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/ahiska-turkleri-surgununun-82-yili-anma-programi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NP23TBPK62ZH63KQTTKQKD.jpeg",
+      "end": "2026-11-23T23:59:00+03:00"
+    },
+    {
+      "id": "9ce93e2f5b426abf7d7b",
+      "title": "Yücel Paşmakçı Ahde Vefa Konseri",
+      "start": "2026-11-10T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Konser",
+      "url": "https://www.bursa.bel.tr/etkinlik/yucel-pasmakci-ahde-vefa-konseri",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M72A2T7R2SG7CZKN518P836V.jpg",
+      "end": "2026-11-17T23:59:00+03:00"
+    },
+    {
+      "id": "81ae44a8c42cf4be9cfa",
+      "title": "Bursa Müze de Kasım Ara Tatili",
+      "start": "2026-11-10T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Atölye",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursa-muze-de-kasim-ara-tatili",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M72TESYQMAWMN01ZF3N14EW6.jpeg",
+      "end": "2026-11-22T23:59:00+03:00"
+    },
+    {
+      "id": "7814351bfa17ac141db0",
+      "title": "Meydan Kadınların",
+      "start": "2026-11-12T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/meydan-kadinlarin-2",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M79NS29D2GX31YFHGR34B7E7.jpeg",
+      "end": "2026-11-20T23:59:00+03:00"
+    },
     {
       "id": "743109afcd83942aa70b",
       "title": "İnegöl Belediyesi Şehir Tiyatrosu Son Durak Yetişkin Tiyatro Oyunu ÜCRETSİZ BİLETLİ Beşinci Mevsim Kültür Sanat Merkezi",
@@ -10,7 +192,22 @@
       "district": "İnegöl",
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-son-durak-yetiskin-tiyatro-oyunu-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler"
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "",
+      "end": ""
+    },
+    {
+      "id": "afffc003074a26ea955c",
+      "title": "Bursa Felsefe Buluşmaları",
+      "start": "2026-11-14T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/bursa-felsefe-bulusmalari-2",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6QTZWT2BDY4FCGET3DM2R4Q.jpeg",
+      "end": "2026-11-14T12:00:00+03:00"
     },
     {
       "id": "8f15cfd712d7a0ae754d",
@@ -21,7 +218,9 @@
       "district": "İnegöl",
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/bir-parca-peynir-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler"
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "",
+      "end": ""
     },
     {
       "id": "10fbf4aea2dda5bb87c8",
@@ -32,7 +231,9 @@
       "district": "İnegöl",
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-iki-bavul-dolusu-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler"
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "",
+      "end": ""
     },
     {
       "id": "8b15901fc18a3945c148",
@@ -43,7 +244,9 @@
       "district": "İnegöl",
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13",
-      "source": "https://www.inegol.bel.tr/etkinlikler"
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "",
+      "end": ""
     }
   ]
 }
