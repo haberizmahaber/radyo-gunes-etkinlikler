@@ -117,17 +117,31 @@ def best_image(p,url):
             return candidate
     return ''
 
-def inegol_event_image(p,url):
-    """Use only event-specific imagery; never reuse municipality-wide OG banners."""
-    if not p:return ''
-    for src,alt in p.images:
+def inegol_event_image(p,url,listing_images=None):
+    """Conservative event poster selection from detail and dated listing card.
+    Never treat a shared site-wide OG image as an event poster.
+    """
+    bad=re.compile(r'logo|icon|avatar|banner|social|placeholder|default|belediye|favicon|header|footer',re.I)
+    candidates=[]
+    for src,alt in (p.images if p else []):candidates.append((src,alt,2))
+    for src,alt in (listing_images or []):candidates.append((src,alt,1))
+    for src,alt,origin in candidates:
         candidate=image_url(src,url)
-        if not candidate:continue
+        if not candidate or bad.search(src+' '+alt):continue
         path=urlparse(candidate).path.lower()
-        if re.search(r'logo|icon|avatar|banner|social|placeholder|default|belediye',src+' '+alt,re.I):continue
-        if re.search(r'\.(?:jpe?g|png|webp)$',path) and (re.search(r'afiş|afis|poster|tiyatro|konser',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/',path,re.I)):
+        if not re.search(r'\.(?:jpe?g|png|webp)$',path):continue
+        if re.search(r'afiş|afis|poster|tiyatro|konser|etkinlik|oyun|kültür|kultur',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/|/uploads/|/images/etkinlik',path,re.I):
             return candidate
     return ''
+
+def inegol_listing_images(p,event_url,source):
+    """Images only from a card containing the exact event detail URL."""
+    target=urlparse(event_url).path.rstrip('/')
+    found=[]
+    for card in p.cards:
+        if any(urlparse(urljoin(source,h)).path.rstrip('/')==target for h in card.get('links',[])):
+            found.extend(card.get('images',[]))
+    return found
 
 def bursa_date(s):
     # Listing dates: 10.11.2026 - 17.11.2026 or 14.11.2026
@@ -208,7 +222,7 @@ def collect():
                     og=clean(detail.meta.get('og:title')) if detail else '' 
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
-                if add(make(title,start,url,source,category,district='İnegöl',image=inegol_event_image(detail,url) if detail else '')):accepted+=1
+                if add(make(title,start,url,source,category,district='İnegöl',image=inegol_event_image(detail,url,inegol_listing_images(p,url,source)))):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
                 start,end=bursa_date(card.get('text',''))
