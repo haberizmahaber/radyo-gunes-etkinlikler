@@ -104,6 +104,13 @@ def best_image(p,url):
     for key in ('og:image','twitter:image'):
         found=image_url(p.meta.get(key,''),url)
         if found:return found
+    # İnegöl detaylarında OG görseli yoksa yalnızca etkinlikle ilişkili görselleri dene.
+    for src,alt in p.images:
+        candidate=image_url(src,url)
+        if not candidate:continue
+        if re.search(r'logo|icon|avatar|banner|social|placeholder',src+' '+alt,re.I):continue
+        if '/etkinlik/' in urlparse(candidate).path.lower() or re.search(r'tiyatro|konser|etkinlik|afiş|afis',alt,re.I):
+            return candidate
     return ''
 
 def bursa_date(s):
