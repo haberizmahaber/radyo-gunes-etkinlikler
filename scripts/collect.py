@@ -5,6 +5,7 @@ import html
 import json
 import re
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -56,9 +57,12 @@ class Parser(HTMLParser):
             card['text']=clean(' '.join(card['parts']))
             self.cards.append(card);self.stack.remove(card)
 
+_DETAIL_CACHE = {}
+
 def fetch(url):
+    if url in _DETAIL_CACHE: return _DETAIL_CACHE[url]
     req=urllib.request.Request(url,headers={'User-Agent':'RadyoGunesEvents/1.2 (+https://radyogunes.com)','Accept':'text/html'})
-    with urllib.request.urlopen(req,timeout=18) as r:
+    with urllib.request.urlopen(req,timeout=10) as r:
         if r.status!=200: raise ValueError('HTTP '+str(r.status))
         body=r.read(2_000_000).decode('utf-8','replace')
     p=Parser();p.feed(body);return p
@@ -140,6 +144,30 @@ def collect():
         try:p=fetch(source)
         except Exception as exc:print('Source skipped:',source,type(exc).__name__,str(exc)[:160]);continue
         accepted=0; candidates=0
+        # Preload detail pages concurrently; a slow page cannot block all other pages.
+        urls=[]
+        for href,label in p.links:
+            u=urljoin(source,href); parsed=urlparse(u)
+            if parsed.hostname not in ('www.bursa.bel.tr','bursa.bel.tr','www.inegol.bel.tr','inegol.bel.tr') or not parsed.path.startswith('/etkinlik/'):continue
+            if 'inegol.bel.tr' in source and not listing_date(label)[0]:continue
+            if u not in urls:urls.append(u)
+        if 'bursa.bel.tr' in source:
+            card_urls=[]
+            for card in p.cards:
+                start,end=bursa_date(card.get('text',''))
+                if not start or (end or start)<dt.datetime.now(TZ)-dt.timedelta(days=1):continue
+                for href in card.get('links',[]):
+                    u=urljoin(source,href)
+                    if urlparse(u).hostname in ('www.bursa.bel.tr','bursa.bel.tr') and urlparse(u).path.startswith('/etkinlik/'):
+                        card_urls.append(u);break
+            urls=list(dict.fromkeys(card_urls))
+        urls=urls[:50]
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            futures={pool.submit(fetch,u):u for u in urls}
+            for future in as_completed(futures):
+                try:_DETAIL_CACHE[futures[future]]=future.result()
+                except Exception:pass
+        print(f'Prefetched {len(_DETAIL_CACHE)} detail pages for {source}',flush=True)
         for obj in jsonld_events(p):
             title=clean(obj.get('name'));start=parse_iso(obj.get('startDate'))
             loc=obj.get('location') or {};loc=loc[0] if isinstance(loc,list) and loc else loc;loc=loc if isinstance(loc,dict) else {}
@@ -164,24 +192,23 @@ def collect():
                 # The listing can truncate labels. Use detail page OG title when available.
                 detail=None
                 try:
-                    detail=fetch(url)
-                    og=clean(detail.meta.get('og:title'))
+                    detail=_DETAIL_CACHE.get(url)
+                    og=clean(detail.meta.get('og:title')) if detail else '' 
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
                 if add(make(title,start,url,source,category,district='İnegöl',image=best_image(detail,url) if 'detail' in locals() and detail else '')):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
                 start,end=bursa_date(card.get('text',''))
-                if not start:continue
+                if not start or (end or start)<dt.datetime.now(TZ)-dt.timedelta(days=1):continue
                 urls=[urljoin(source,h) for h in card.get('links',[]) if urlparse(urljoin(source,h)).path.startswith('/etkinlik/')]
                 urls=[u for u in urls if urlparse(u).hostname in ('www.bursa.bel.tr','bursa.bel.tr')]
                 if not urls:continue
                 url=urls[0]
                 if url.rstrip('/')==source.rstrip('/'):continue
                 candidates+=1
-                try:detail=fetch(url)
-                except Exception as exc:
-                    print('Bursa detail unavailable:',url,type(exc).__name__);continue
+                detail=_DETAIL_CACHE.get(url)
+                if detail is None:continue
                 title=clean(detail.meta.get('og:title') or detail.title).split('|')[0].strip()
                 title=re.sub(r'\s*[-–]\s*Bursa Büyükşehir Belediyesi.*$','',title,flags=re.I).strip()
                 if not title or title.lower() in ('etkinlikler','etkinlik'):continue
