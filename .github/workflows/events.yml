@@ -1,0 +1,22 @@
+name: Radyo Gunes etkinlikleri
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5,17 * * *'
+permissions:
+  contents: write
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/collect.py
+      - name: Save JSON
+        run: |
+          git config user.name 'radyo-gunes-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/events.json
+          if ! git diff --cached --quiet; then git commit -m 'Update event feed'; git push; fi
