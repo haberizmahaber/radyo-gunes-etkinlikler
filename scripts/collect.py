@@ -19,9 +19,22 @@ def clean(s):
 
 class Parser(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False
+        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False; self.images=[]; self.stack=[]; self.cards=[]
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
+        if tag in ('article','li','div'):
+            cls=a.get('class','').lower()
+            if any(t in cls for t in ('event','etkinlik','card','item')):
+                self.stack.append({'tag':tag,'depth':0,'parts':[],'links':[],'images':[]})
+        if tag not in ('img','meta','input','br','hr','link','source','area','embed','wbr'):
+            for card in self.stack: card['depth']+=1
+        if tag=='img':
+            src=a.get('data-src') or a.get('data-original') or a.get('src') or ''
+            if src:
+                self.images.append((src,clean(a.get('alt',''))))
+                for card in self.stack:card['images'].append((src,clean(a.get('alt',''))))
+        if tag=='a' and a.get('href'):
+            for card in self.stack:card['links'].append(a['href'])
         if tag=='a' and a.get('href') and self.link is None: self.link=a['href']; self.text=[]
         if tag=='script' and 'ld+json' in a.get('type','').lower(): self.script=True; self.buf=[]
         if tag=='meta':
@@ -32,10 +45,16 @@ class Parser(HTMLParser):
         if self.link is not None: self.text.append(data)
         if self.script: self.buf.append(data)
         if self.in_title: self.title+=data
+        for card in self.stack:card['parts'].append(data)
     def handle_endtag(self,tag):
         if tag=='a' and self.link is not None: self.links.append((self.link,clean(' '.join(self.text)))); self.link=None; self.text=[]
         if tag=='script' and self.script: self.scripts.append(''.join(self.buf)); self.script=False
         if tag=='title': self.in_title=False
+        for card in self.stack:card['depth']-=1
+        finished=[card for card in self.stack if card['depth']<=0]
+        for card in finished:
+            card['text']=clean(' '.join(card['parts']))
+            self.cards.append(card);self.stack.remove(card)
 
 def fetch(url):
     req=urllib.request.Request(url,headers={'User-Agent':'RadyoGunesEvents/1.2 (+https://radyogunes.com)','Accept':'text/html'})
@@ -73,13 +92,37 @@ def jsonld_events(p):
         try:yield from walk(json.loads(raw))
         except (ValueError,TypeError):pass
 
-def make(title,start,url,source,category='',venue='',district=''):
+def image_url(candidate,base):
+    if not isinstance(candidate,str) or not candidate:return ''
+    u=urljoin(base,candidate.strip())
+    parsed=urlparse(u)
+    if parsed.scheme!='https' or parsed.hostname not in ('www.bursa.bel.tr','bursa.bel.tr','www.inegol.bel.tr','inegol.bel.tr') or parsed.username or parsed.password:return ''
+    if re.search(r'\.(svg|gif)(?:[?#]|$)',parsed.path,re.I):return ''
+    return u
+
+def best_image(p,url):
+    for key in ('og:image','twitter:image'):
+        found=image_url(p.meta.get(key,''),url)
+        if found:return found
+    return ''
+
+def bursa_date(s):
+    # Listing dates: 10.11.2026 - 17.11.2026 or 14.11.2026
+    m=re.search(r'(?<!\d)(\d{2})\.(\d{2})\.(20\d{2})(?:\s*[-–]\s*(\d{2})\.(\d{2})\.(20\d{2}))?',s)
+    if not m:return None,None
+    try:
+        start=dt.datetime(int(m[3]),int(m[2]),int(m[1]),12,0,tzinfo=TZ)
+        end=dt.datetime(int(m[6]),int(m[5]),int(m[4]),23,59,tzinfo=TZ) if m[6] else start
+        return start,end
+    except ValueError:return None,None
+
+def make(title,start,url,source,category='',venue='',district='',image='',end=None):
     title=clean(title)
     if not title or len(title)<6 or not start or not url.startswith('https://'):return None
     now=dt.datetime.now(TZ)
-    if not now-dt.timedelta(days=1)<=start<=now+dt.timedelta(days=365):return None
+    if not now-dt.timedelta(days=1)<=start<=now+dt.timedelta(days=365) and not (end and now<=end<=now+dt.timedelta(days=365)):return None
     key=hashlib.sha256((url.lower()+'|'+start.date().isoformat()).encode()).hexdigest()[:20]
-    return {'id':key,'title':title[:180],'start':start.isoformat(),'venue':clean(venue)[:120], 'city':'Bursa','district':district,'category':category or 'Kültür & Sanat','url':url,'source':source}
+    return {'id':key,'title':title[:180],'start':start.isoformat(),'venue':clean(venue)[:120], 'city':'Bursa','district':district,'category':category or 'Kültür & Sanat','url':url,'source':source,'image':image_url(image,url),'end':end.isoformat() if end else ''}
 
 def collect():
     events=[];seen=set()
@@ -96,7 +139,7 @@ def collect():
             addr=loc.get('address') or {};addr=addr if isinstance(addr,dict) else {}
             url=obj.get('url') or source
             if not isinstance(url,str) or urlparse(url).netloc!=urlparse(source).netloc:url=source
-            e=make(title,start,url,source,clean(obj.get('eventType')),loc.get('name'),clean(addr.get('addressLocality')))
+            e=make(title,start,url,source,clean(obj.get('eventType')),loc.get('name'),clean(addr.get('addressLocality')),image=(obj.get('image',[None])[0] if isinstance(obj.get('image'),list) and obj.get('image') else obj.get('image','')) if isinstance(obj.get('image'),(str,list)) else '')
             if add(e):accepted+=1
         # Inegol municipality: detail URL and dated listing label (not news or navigation)
         if 'inegol.bel.tr' in source:
@@ -112,12 +155,40 @@ def collect():
                     if remainder.lower().startswith(word):category=word.capitalize();remainder=remainder[len(word):].strip();break
                 title=remainder
                 # The listing can truncate labels. Use detail page OG title when available.
+                detail=None
                 try:
                     detail=fetch(url)
                     og=clean(detail.meta.get('og:title'))
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
-                if add(make(title,start,url,source,category,district='İnegöl')):accepted+=1
+                if add(make(title,start,url,source,category,district='İnegöl',image=best_image(detail,url) if 'detail' in locals() and detail else '')):accepted+=1
+        if 'bursa.bel.tr' in source:
+            for card in p.cards:
+                start,end=bursa_date(card.get('text',''))
+                if not start:continue
+                urls=[urljoin(source,h) for h in card.get('links',[]) if urlparse(urljoin(source,h)).path.startswith('/etkinlik/')]
+                urls=[u for u in urls if urlparse(u).hostname in ('www.bursa.bel.tr','bursa.bel.tr')]
+                if not urls:continue
+                url=urls[0]
+                if url.rstrip('/')==source.rstrip('/'):continue
+                candidates+=1
+                try:detail=fetch(url)
+                except Exception as exc:
+                    print('Bursa detail unavailable:',url,type(exc).__name__);continue
+                title=clean(detail.meta.get('og:title') or detail.title).split('|')[0].strip()
+                title=re.sub(r'\s*[-–]\s*Bursa Büyükşehir Belediyesi.*$','',title,flags=re.I).strip()
+                if not title or title.lower() in ('etkinlikler','etkinlik'):continue
+                category='Kültür & Sanat'
+                for c in ('Konser','Sergi','Atölye','Panel-Söyleşi','Festival','Tiyatro','Konferans'):
+                    if re.search(r'(?<!\w)'+re.escape(c)+r'(?!\w)',card['text'],re.I):category=c;break
+                venue=''
+                m=re.search(r'\bYer\s*:\s*([^|]+)',card['text'],re.I)
+                if m:venue=clean(m[1])[:120]
+                image=best_image(detail,url)
+                if not image:
+                    for src,alt in card['images']:
+                        if src:image=image_url(src,source);break
+                if add(make(title,start,url,source,category,venue,image=image,end=end)):accepted+=1
         print(f'Source: {source} | detail candidates={candidates} | accepted={accepted}')
     print('Collected',len(events),'events before fallback')
     return sorted(events,key=lambda x:x['start'])
@@ -131,7 +202,7 @@ if __name__=='__main__':
             existing={e['id'] for e in events}
             for e in old.get('events',[]):
                 d=parse_iso(e.get('start'))
-                if d and d>=dt.datetime.now(TZ)-dt.timedelta(days=1) and e.get('id') not in existing and e.get('url','').startswith('https://'):
+                if d and (d>=dt.datetime.now(TZ)-dt.timedelta(days=1) or (parse_iso(e.get('end')) and parse_iso(e.get('end'))>=dt.datetime.now(TZ))) and e.get('id') not in existing and e.get('url','').startswith('https://'):
                     events.append(e);existing.add(e['id'])
         except (ValueError,TypeError,KeyError):pass
     events.sort(key=lambda x:x['start'])
