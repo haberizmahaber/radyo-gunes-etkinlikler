@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T15:50:28.510897+00:00",
+  "updated_at": "2026-11-13T17:58:03.844492+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -182,19 +182,6 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M79NS29D2GX31YFHGR34B7E7.jpeg",
       "end": "2026-11-20T23:59:00+03:00"
-    },
-    {
-      "id": "743109afcd83942aa70b",
-      "title": "İnegöl Belediyesi Şehir Tiyatrosu Son Durak Yetişkin Tiyatro Oyunu ÜCRETSİZ BİLETLİ Beşinci Mevsim Kültür Sanat Merkezi",
-      "start": "2026-11-12T20:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "İnegöl",
-      "category": "Tiyatro",
-      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-son-durak-yetiskin-tiyatro-oyunu-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "",
-      "end": ""
     },
     {
       "id": "afffc003074a26ea955c",
