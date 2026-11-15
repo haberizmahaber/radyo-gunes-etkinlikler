@@ -11,7 +11,9 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 TZ = dt.timezone(dt.timedelta(hours=3))
-SOURCES = ['https://www.bursa.bel.tr/etkinlik', 'https://www.inegol.bel.tr/etkinlikler']
+SOURCES = ['https://www.bursa.bel.tr/etkinlik', 'https://etkinlik.inegol.bel.tr/etkinlikler', 'https://www.inegol.bel.tr/etkinlikler']
+INEGOL_HOSTS = ('etkinlik.inegol.bel.tr', 'www.inegol.bel.tr', 'inegol.bel.tr')
+ALLOWED_HOSTS = ('www.bursa.bel.tr', 'bursa.bel.tr') + INEGOL_HOSTS
 MONTHS = {'oca':1,'şub':2,'sub':2,'mar':3,'nis':4,'may':5,'haz':6,'tem':7,'ağu':8,'agu':8,'eyl':9,'eki':10,'kas':11,'ara':12}
 CATEGORIES = ['tiyatro','konser','festival','sergi','atölye','atolye','söyleşi','soylesi','gösteri','gosteri','sinema','çocuk','cocuk']
 
@@ -111,7 +113,7 @@ def image_url(candidate,base):
     if not isinstance(candidate,str) or not candidate:return ''
     u=urljoin(base,candidate.strip())
     parsed=urlparse(u)
-    if parsed.scheme!='https' or parsed.hostname not in ('www.bursa.bel.tr','bursa.bel.tr','www.inegol.bel.tr','inegol.bel.tr') or parsed.username or parsed.password:return ''
+    if parsed.scheme!='https' or parsed.hostname not in ALLOWED_HOSTS or parsed.username or parsed.password:return ''
     if re.search(r'\.(svg|gif)(?:[?#]|$)',parsed.path,re.I):return ''
     return u
 
@@ -185,18 +187,25 @@ def make(title,start,url,source,category='',venue='',district='',image='',end=No
 def collect():
     events=[];seen=set()
     def add(e):
-        if e and e['id'] not in seen:events.append(e);seen.add(e['id']);return True
-        return False
+        if not e or e['id'] in seen:return False
+        # Match same event across the new ticketing portal and the old municipality listing.
+        # Do not merge events on title alone: different performance dates are distinct.
+        if e.get('district')=='İnegöl':
+            for old in events:
+                if old.get('district')=='İnegöl' and old['start']==e['start'] and clean(old['title']).casefold()==clean(e['title']).casefold():
+                    if not old.get('image') and e.get('image'):old['image']=e['image']
+                    return False
+        events.append(e);seen.add(e['id']);return True
     for source in SOURCES:
         try:p=fetch(source)
-        except Exception as exc:print('Source skipped:',source,type(exc).__name__,str(exc)[:160]);continue
+        except Exception as exc:print('Source skipped:',source,type(exc).__name__,str(exc)[:160],flush=True);continue
         accepted=0; candidates=0
         # Preload detail pages concurrently; a slow page cannot block all other pages.
         urls=[]
         for href,label in p.links:
             u=urljoin(source,href); parsed=urlparse(u)
-            if parsed.hostname not in ('www.bursa.bel.tr','bursa.bel.tr','www.inegol.bel.tr','inegol.bel.tr') or not parsed.path.startswith('/etkinlik/'):continue
-            if 'inegol.bel.tr' in source and not listing_date(label)[0]:continue
+            if parsed.hostname not in ALLOWED_HOSTS or not (parsed.path.startswith('/etkinlik/') or (parsed.hostname == 'etkinlik.inegol.bel.tr' and parsed.path.startswith('/etkinlikler/'))):continue
+            if 'inegol.bel.tr' in source and not (listing_date(label)[0] or bursa_date(label)[0]):continue
             if u not in urls:urls.append(u)
         if 'bursa.bel.tr' in source:
             card_urls=[]
@@ -214,7 +223,7 @@ def collect():
             for future in as_completed(futures):
                 try:_DETAIL_CACHE[futures[future]]=future.result()
                 except Exception:pass
-        print(f'Prefetched {len(_DETAIL_CACHE)} detail pages for {source}',flush=True)
+        print(f'Prefetched {sum(u in _DETAIL_CACHE for u in urls)} / {len(urls)} detail pages for {source}',flush=True)
         for obj in jsonld_events(p):
             title=clean(obj.get('name'));start=parse_iso(obj.get('startDate'))
             loc=obj.get('location') or {};loc=loc[0] if isinstance(loc,list) and loc else loc;loc=loc if isinstance(loc,dict) else {}
@@ -227,9 +236,12 @@ def collect():
         if 'inegol.bel.tr' in source:
             for href,label in p.links:
                 url=urljoin(source,href);parsed=urlparse(url)
-                if parsed.netloc not in ('www.inegol.bel.tr','inegol.bel.tr') or not parsed.path.startswith('/etkinlik/'):continue
+                if parsed.hostname not in INEGOL_HOSTS or not (parsed.path.startswith('/etkinlik/') or (parsed.hostname == 'etkinlik.inegol.bel.tr' and parsed.path.startswith('/etkinlikler/'))):continue
                 candidates+=1
                 start,pos=listing_date(label)
+                if not start:
+                    start,_=bursa_date(label)
+                    pos=0
                 if not start:continue
                 remainder=label[pos:].strip()
                 category='Kültür & Sanat'
@@ -243,7 +255,10 @@ def collect():
                     og=clean(detail.meta.get('og:title')) if detail else '' 
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
-                if add(make(title,start,url,source,category,district='İnegöl',image=inegol_event_image(detail,url,inegol_listing_images(p,url,source)))):accepted+=1
+                if detail is None: print('Inegol detail not fetched:',url,flush=True)
+                img=inegol_event_image(detail,url,inegol_listing_images(p,url,source))
+                print('Inegol image:', 'FOUND' if img else 'MISSING',url,flush=True)
+                if add(make(title,start,url,source,category,district='İnegöl',image=img)):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
                 start,end=bursa_date(card.get('text',''))
