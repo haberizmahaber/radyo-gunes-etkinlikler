@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T05:59:55.679537+00:00",
+  "updated_at": "2026-11-15T17:38:29.395137+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -182,32 +182,6 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M79NS29D2GX31YFHGR34B7E7.jpeg",
       "end": "2026-11-20T23:59:00+03:00"
-    },
-    {
-      "id": "afffc003074a26ea955c",
-      "title": "Bursa Felsefe Buluşmaları",
-      "start": "2026-11-14T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/bursa-felsefe-bulusmalari-2",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6QTZWT2BDY4FCGET3DM2R4Q.jpeg",
-      "end": "2026-11-14T12:00:00+03:00"
-    },
-    {
-      "id": "8f15cfd712d7a0ae754d",
-      "title": "Bir Parça Peynir Çocuk Tiyatro Oyunu 5 - 12 Yaş ÜCRETSİZ BİLETLİ Beşinci Mevsim Kültür Sanat Merkezi",
-      "start": "2026-11-14T14:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "İnegöl",
-      "category": "Tiyatro",
-      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/bir-parca-peynir-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "",
-      "end": ""
     },
     {
       "id": "10fbf4aea2dda5bb87c8",
