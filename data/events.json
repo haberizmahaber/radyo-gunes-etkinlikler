@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T17:45:51.253627+00:00",
+  "updated_at": "2026-11-15T05:59:55.679537+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -119,19 +119,6 @@
       "end": "2026-12-01T23:59:00+03:00"
     },
     {
-      "id": "e635c83d1240b2459371",
-      "title": "AKTOPRAKLIK ARKEOLOJİ SÖYLEŞİLERİ – 8",
-      "start": "2026-11-05T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/aktopraklik-arkeoloji-soylesileri-8",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NT71SN5GYAKD7MJJSG0FRF.jpeg",
-      "end": "2026-11-15T23:59:00+03:00"
-    },
-    {
       "id": "9c684339fabd96149737",
       "title": "AHISKA TÜRKLERİ SÜRGÜNÜNÜN 82. YILI ANMA PROGRAMI",
       "start": "2026-11-05T12:00:00+03:00",
@@ -143,6 +130,19 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NP23TBPK62ZH63KQTTKQKD.jpeg",
       "end": "2026-11-23T23:59:00+03:00"
+    },
+    {
+      "id": "e635c83d1240b2459371",
+      "title": "AKTOPRAKLIK ARKEOLOJİ SÖYLEŞİLERİ – 8",
+      "start": "2026-11-05T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/aktopraklik-arkeoloji-soylesileri-8",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NT71SN5GYAKD7MJJSG0FRF.jpeg",
+      "end": "2026-11-15T23:59:00+03:00"
     },
     {
       "id": "9ce93e2f5b426abf7d7b",
