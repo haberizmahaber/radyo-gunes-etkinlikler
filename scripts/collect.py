@@ -22,9 +22,14 @@ def clean(s):
 
 class Parser(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False; self.images=[]; self.stack=[]; self.cards=[]
+        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False; self.images=[]; self.stack=[]; self.cards=[]; self.anchor_stack=[]; self.anchor_images={}
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
+        if tag=='a' and a.get('href'):
+            self.anchor_stack.append({'href':a['href'],'images':[],'depth':0})
+        for anchor in self.anchor_stack:
+            if tag not in ('img','meta','input','br','hr','link','source','area','embed','wbr'):
+                anchor['depth']+=1
         if tag in ('article','li','div'):
             cls=a.get('class','').lower()
             if any(t in cls for t in ('event','etkinlik','card','item')):
@@ -39,6 +44,7 @@ class Parser(HTMLParser):
             if src:
                 self.images.append((src,clean(a.get('alt',''))))
                 for card in self.stack:card['images'].append((src,clean(a.get('alt',''))))
+                for anchor in self.anchor_stack:anchor['images'].append((src,clean(a.get('alt',''))))
         # Capture background images used by municipal event cards.
         if tag in ('div','a','picture','figure','section'):
             style=a.get('style','')
@@ -47,6 +53,7 @@ class Parser(HTMLParser):
             if src:
                 self.images.append((src,''))
                 for card in self.stack:card['images'].append((src,''))
+                for anchor in self.anchor_stack:anchor['images'].append((src,''))
         if tag=='a' and a.get('href'):
             for card in self.stack:card['links'].append(a['href'])
         if tag=='a' and a.get('href') and self.link is None: self.link=a['href']; self.text=[]
@@ -64,6 +71,11 @@ class Parser(HTMLParser):
         if tag=='a' and self.link is not None: self.links.append((self.link,clean(' '.join(self.text)))); self.link=None; self.text=[]
         if tag=='script' and self.script: self.scripts.append(''.join(self.buf)); self.script=False
         if tag=='title': self.in_title=False
+        for anchor in self.anchor_stack:anchor['depth']-=1
+        for anchor in list(self.anchor_stack):
+            if anchor['depth']<=0:
+                self.anchor_images.setdefault(anchor['href'],[]).extend(anchor['images'])
+                self.anchor_stack.remove(anchor)
         for card in self.stack:card['depth']-=1
         finished=[card for card in self.stack if card['depth']<=0]
         for card in finished:
@@ -158,13 +170,31 @@ def inegol_event_image(p,url,listing_images=None):
     return ''
 
 def inegol_listing_images(p,event_url,source):
-    """Images only from a card containing the exact event detail URL."""
+    """Use only images INSIDE an anchor linking directly to this event.
+    Large outer card wrappers contain unrelated event posters and are unsafe.
+    """
     target=urlparse(event_url).path.rstrip('/')
     found=[]
-    for card in p.cards:
-        if any(urlparse(urljoin(source,h)).path.rstrip('/')==target for h in card.get('links',[])):
-            found.extend(card.get('images',[]))
-    return found
+    for href, images in p.anchor_images.items():
+        resolved=urljoin(source,href)
+        if urlparse(resolved).hostname in INEGOL_HOSTS and urlparse(resolved).path.rstrip('/')==target:
+            found.extend(images)
+    return list(dict.fromkeys(found))
+
+
+def inegol_verified_image(detail, url, listing_images):
+    """Prefer a poster bound to the exact listing link; never guess from 600+ images."""
+    # A linked image has a stronger event association than arbitrary detail-page assets.
+    bad=re.compile(r'logo|icon|avatar|banner|social|placeholder|default|favicon|header|footer',re.I)
+    choices=[]
+    for src,alt in listing_images:
+        u=image_url(src,url)
+        if not u or bad.search(src+' '+alt):continue
+        if not re.search(r'\.(?:jpe?g|png|webp)$',urlparse(u).path,re.I):continue
+        if u not in choices:choices.append(u)
+    if len(choices)==1:return choices[0], 'EXACT_LINK'
+    # Multiple or zero linked images: no safe association; print for diagnosis.
+    return '', 'AMBIGUOUS_LINK' if choices else 'NO_LINK_IMAGE'
 
 def bursa_date(s):
     # Listing dates: 10.11.2026 - 17.11.2026 or 14.11.2026
@@ -256,8 +286,11 @@ def collect():
                     if og and len(og)>len(title) and 'inegöl belediyesi' not in og.lower().split('|')[-1]:title=og.split('|')[0].strip()
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
                 if detail is None: print('Inegol detail not fetched:',url,flush=True)
-                img=inegol_event_image(detail,url,inegol_listing_images(p,url,source))
-                print('Inegol image:', 'FOUND' if img else 'MISSING', url, '| selected:', img or '(none)', '| detail_images:', len(detail.images) if detail else 0, '| listing_images:', len(inegol_listing_images(p,url,source)), flush=True)
+                linked=inegol_listing_images(p,url,source)
+                img,reason=inegol_verified_image(detail,url,linked)
+                print('Inegol image:', 'FOUND' if img else 'MISSING', url, '| method:',reason, '| selected:', img or '(none)', '| detail_images:', len(detail.images) if detail else 0, '| linked_images:', len(linked), flush=True)
+                if not img:
+                    print('Inegol link candidates:', url, '|', repr(linked[:8])[:1000],flush=True)
                 if add(make(title,start,url,source,category,district='İnegöl',image=img)):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
@@ -310,7 +343,7 @@ if __name__=='__main__':
             for e in events:
                 if e.get('district')=='İnegöl' and not e.get('image'):
                     old_url=old_images.get(e.get('id'))
-                    if old_url and image_url(old_url,e['url']):e['image']=old_url
+                    if old_url and image_url(old_url,e['url']) and old_url not in ('https://www.inegol.bel.tr/uploads/2026/11/13/82e95b59b77ba18edb698cd56d54e0bc73c0dc5f.jpg',):e['image']=old_url
         except (ValueError,TypeError,KeyError):pass
     # A generic İnegöl banner must not appear as the poster for several events.
     image_counts={}
