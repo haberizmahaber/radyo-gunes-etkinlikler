@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T18:14:07.670810+00:00",
+  "updated_at": "2026-11-15T18:19:18.608057+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -193,7 +193,7 @@
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-iki-bavul-dolusu-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
       "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/11/311c8d1b7b77a051756fe25dde25a71bd3bb7bea.png",
       "end": ""
     },
     {
@@ -206,7 +206,7 @@
       "category": "Tiyatro",
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13",
       "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/11/c926eda52350d63b3e087fa77c8ed35091277cf0.png",
       "end": ""
     }
   ]
