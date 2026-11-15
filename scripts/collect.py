@@ -257,7 +257,7 @@ def collect():
                 except Exception as exc:print('Detail unavailable:',url,type(exc).__name__)
                 if detail is None: print('Inegol detail not fetched:',url,flush=True)
                 img=inegol_event_image(detail,url,inegol_listing_images(p,url,source))
-                print('Inegol image:', 'FOUND' if img else 'MISSING',url,flush=True)
+                print('Inegol image:', 'FOUND' if img else 'MISSING', url, '| selected:', img or '(none)', '| detail_images:', len(detail.images) if detail else 0, '| listing_images:', len(inegol_listing_images(p,url,source)), flush=True)
                 if add(make(title,start,url,source,category,district='İnegöl',image=img)):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
@@ -319,8 +319,12 @@ if __name__=='__main__':
             image_counts[e['image']]=image_counts.get(e['image'],0)+1
     for e in events:
         if e.get('district')=='İnegöl' and e.get('image') and image_counts[e['image']]>1:
+            print('Inegol image rejected: SHARED_IMAGE', '| event:', e.get('title','')[:90], '| url:', e.get('image'), '| count:', image_counts[e['image']], flush=True)
             e['image']=''
     events.sort(key=lambda x:x['start'])
     out.write_text(json.dumps({'updated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'events':events},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('Saved',len(events),'events')
     print('Inegol poster status:',sum(e.get('district')=='İnegöl' and bool(e.get('image')) for e in events),'with image /',sum(e.get('district')=='İnegöl' for e in events),'total')
+    for e in events:
+        if e.get('district')=='İnegöl':
+            print('Inegol final:', e.get('start'), '|', e.get('title','')[:90], '| image:', e.get('image') or '(empty)', flush=True)
