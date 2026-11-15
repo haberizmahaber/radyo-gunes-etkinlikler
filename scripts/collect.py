@@ -29,8 +29,8 @@ class Parser(HTMLParser):
                 self.stack.append({'tag':tag,'depth':0,'parts':[],'links':[],'images':[]})
         if tag not in ('img','meta','input','br','hr','link','source','area','embed','wbr'):
             for card in self.stack: card['depth']+=1
-        if tag=='img':
-            src=a.get('data-src') or a.get('data-original') or a.get('data-lazy-src') or a.get('data-image') or a.get('src') or ''
+        if tag in ('img','source'):
+            src=a.get('data-src') or a.get('data-original') or a.get('data-lazy-src') or a.get('data-image') or a.get('data-src-large') or a.get('src') or ''
             if not src:
                 srcset=a.get('data-srcset') or a.get('srcset') or ''
                 src=srcset.split(',')[0].strip().split(' ')[0] if srcset else ''
@@ -38,10 +38,10 @@ class Parser(HTMLParser):
                 self.images.append((src,clean(a.get('alt',''))))
                 for card in self.stack:card['images'].append((src,clean(a.get('alt',''))))
         # Capture background images used by municipal event cards.
-        if tag in ('div','a','picture','figure'):
+        if tag in ('div','a','picture','figure','section'):
             style=a.get('style','')
             bg=re.search(r'background(?:-image)?\s*:\s*url\([\"\']?([^\)\"\']+)',style,re.I)
-            src=a.get('data-background') or a.get('data-bg') or (bg.group(1) if bg else '')
+            src=a.get('data-background') or a.get('data-bg') or a.get('data-background-image') or (bg.group(1) if bg else '')
             if src:
                 self.images.append((src,''))
                 for card in self.stack:card['images'].append((src,''))
@@ -143,6 +143,16 @@ def inegol_event_image(p,url,listing_images=None):
         if not re.search(r'\.(?:jpe?g|png|webp)$',path):continue
         if re.search(r'afiş|afis|poster|tiyatro|konser|etkinlik|oyun|kültür|kultur',alt,re.I) or re.search(r'/etkinlik(?:ler)?/|/upload/|/uploads/|/images/etkinlik|/storage/|/medya/',path,re.I):
             return candidate
+    # An event's structured-data image is stronger evidence than a generic page image.
+    if p:
+        for obj in jsonld_events(p):
+            raw=obj.get('image')
+            values=raw if isinstance(raw,list) else [raw]
+            for item in values:
+                if isinstance(item,dict):item=item.get('url') or item.get('contentUrl')
+                candidate=image_url(item,url)
+                if candidate and not bad.search(candidate) and re.search(r'\.(?:jpe?g|png|webp)(?:$|[?#])',candidate,re.I):
+                    return candidate
     return ''
 
 def inegol_listing_images(p,event_url,source):
@@ -276,6 +286,17 @@ if __name__=='__main__':
                 if d and (d>=dt.datetime.now(TZ)-dt.timedelta(days=1) or (parse_iso(e.get('end')) and parse_iso(e.get('end'))>=dt.datetime.now(TZ))) and e.get('id') not in existing and e.get('url','').startswith('https://'):
                     events.append(e);existing.add(e['id'])
         except (ValueError,TypeError,KeyError):pass
+    # Preserve previously verified per-event artwork when the new scrape misses it.
+    # Never copy a poster from a different event.
+    if out.exists():
+        try:
+            previous=json.loads(out.read_text(encoding='utf-8'))
+            old_images={e.get('id'):e.get('image') for e in previous.get('events',[]) if isinstance(e,dict)}
+            for e in events:
+                if e.get('district')=='İnegöl' and not e.get('image'):
+                    old_url=old_images.get(e.get('id'))
+                    if old_url and image_url(old_url,e['url']):e['image']=old_url
+        except (ValueError,TypeError,KeyError):pass
     # A generic İnegöl banner must not appear as the poster for several events.
     image_counts={}
     for e in events:
@@ -287,3 +308,4 @@ if __name__=='__main__':
     events.sort(key=lambda x:x['start'])
     out.write_text(json.dumps({'updated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'events':events},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('Saved',len(events),'events')
+    print('Inegol poster status:',sum(e.get('district')=='İnegöl' and bool(e.get('image')) for e in events),'with image /',sum(e.get('district')=='İnegöl' for e in events),'total')
