@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T18:19:18.608057+00:00",
+  "updated_at": "2026-11-16T06:30:02.439479+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -67,19 +67,6 @@
       "end": "2026-11-17T23:59:00+03:00"
     },
     {
-      "id": "c79f5d7b8c9b24938ad1",
-      "title": "YEKPARE Hendesî Desen ve Ebru Sergisi",
-      "start": "2026-10-27T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Sergi",
-      "url": "https://www.bursa.bel.tr/etkinlik/yekpare-hendesi-desen-ve-ebru-sergisi",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/10/01M5YAXCTAGV2ACDXG4HNQ1AF9.jpeg",
-      "end": "2026-11-15T23:59:00+03:00"
-    },
-    {
       "id": "3164b96d7975d53a7f86",
       "title": "Bursa’nın Cumhuriyet Albümü: Bir Kentin Ortak Hafızası” fotoğraf sergisi",
       "start": "2026-10-28T12:00:00+03:00",
@@ -132,19 +119,6 @@
       "end": "2026-11-23T23:59:00+03:00"
     },
     {
-      "id": "e635c83d1240b2459371",
-      "title": "AKTOPRAKLIK ARKEOLOJİ SÖYLEŞİLERİ – 8",
-      "start": "2026-11-05T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/aktopraklik-arkeoloji-soylesileri-8",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NT71SN5GYAKD7MJJSG0FRF.jpeg",
-      "end": "2026-11-15T23:59:00+03:00"
-    },
-    {
       "id": "9ce93e2f5b426abf7d7b",
       "title": "Yücel Paşmakçı Ahde Vefa Konseri",
       "start": "2026-11-10T12:00:00+03:00",
@@ -182,6 +156,19 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M79NS29D2GX31YFHGR34B7E7.jpeg",
       "end": "2026-11-20T23:59:00+03:00"
+    },
+    {
+      "id": "5e60d4af29d4c314e558",
+      "title": "Ara Tatil Etkinlik Takvimi",
+      "start": "2026-11-15T12:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/ara-tatil-etkinlik-takvimi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7HDWJMZ3KHAW5QNJ0W7NDVV.jpeg",
+      "end": "2026-11-23T23:59:00+03:00"
     },
     {
       "id": "10fbf4aea2dda5bb87c8",
