@@ -206,6 +206,31 @@ def bursa_date(s):
         return start,end
     except ValueError:return None,None
 
+def inegol_display_fields(title):
+    """Extract venue only when explicitly named; keep uncertain data unchanged."""
+    title=clean(title)
+    venue=''
+    known='Beşinci Mevsim Kültür Sanat Merkezi'
+    if known.casefold() in title.casefold():
+        venue=known
+        title=re.sub(re.escape(known), '', title, flags=re.I).strip(' -–|,')
+    # Strip a generic organiser prefix, never the name of a performance.
+    title=re.sub(r'^İnegöl Belediyesi Şehir Tiyatrosu\s+', '', title, flags=re.I).strip()
+    # Ticketing and age conditions are kept in the source URL, not invented.
+    title=re.sub(r'\s+(?:ÜCRETSİZ|Ücretsiz)\s+BİLETLİ\s*(?:\+\s*\d+)?\s*$', '', title, flags=re.I).strip()
+    title=re.sub(r'\s+\d+\s*[-–]\s*\d+\s+Yaş\s+Ücretsiz\s+Biletli\s*$', '', title, flags=re.I).strip()
+    return title or clean(title), venue
+
+
+def explicit_venue(text):
+    """Use only a clearly labelled venue; avoid swallowing neighbouring fields."""
+    m=re.search(r'(?:^|[\n|])\s*(?:Yer|Mekân|Mekan|Etkinlik Yeri)\s*:\s*([^\n|]{3,120})', text, re.I)
+    if not m:return ''
+    value=clean(m.group(1))
+    value=re.split(r'\s+(?:Tarih|Saat|Kategori|Bilet)\s*:',value,maxsplit=1,flags=re.I)[0].strip()
+    return value[:120]
+
+
 def make(title,start,url,source,category='',venue='',district='',image='',end=None):
     title=clean(title)
     if not title or len(title)<6 or not start or not url.startswith('https://'):return None
@@ -291,7 +316,8 @@ def collect():
                 print('Inegol image:', 'FOUND' if img else 'MISSING', url, '| method:',reason, '| selected:', img or '(none)', '| detail_images:', len(detail.images) if detail else 0, '| linked_images:', len(linked), flush=True)
                 if not img:
                     print('Inegol link candidates:', url, '|', repr(linked[:8])[:1000],flush=True)
-                if add(make(title,start,url,source,category,district='İnegöl',image=img)):accepted+=1
+                title, venue=inegol_display_fields(title)
+                if add(make(title,start,url,source,category,venue=venue,district='İnegöl',image=img)):accepted+=1
         if 'bursa.bel.tr' in source:
             for card in p.cards:
                 start,end=bursa_date(card.get('text',''))
@@ -310,9 +336,9 @@ def collect():
                 category='Kültür & Sanat'
                 for c in ('Konser','Sergi','Atölye','Panel-Söyleşi','Festival','Tiyatro','Konferans'):
                     if re.search(r'(?<!\w)'+re.escape(c)+r'(?!\w)',card['text'],re.I):category=c;break
-                venue=''
-                m=re.search(r'\bYer\s*:\s*([^|]+)',card['text'],re.I)
-                if m:venue=clean(m[1])[:120]
+                venue=explicit_venue(card.get('text',''))
+                if not venue:
+                    venue=explicit_venue(detail.meta.get('og:description','') or detail.meta.get('description',''))
                 image=best_image(detail,url)
                 if not image:
                     for src,alt in card['images']:
