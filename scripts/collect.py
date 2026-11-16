@@ -274,8 +274,24 @@ def bursa_date_adjacent_venue(detail):
             return ''
     return ''
 
+def safe_bursa_venue(title, venue):
+    """Reject misleading venue values, without guessing missing locations."""
+    title=clean(title)
+    venue=clean(venue)
+    if not venue:return ''
+    norm=lambda s: re.sub(r'[^\w]+','',s.casefold())
+    if norm(venue)==norm(title):return ''
+    # Calendar/program headings are not physical places.
+    if re.search(r'(?:etkinlik|program|tatil)\s+takvim',venue,re.I):return ''
+    if re.fullmatch(r'(?:kasım|aralık|ocak|şubat|mart|nisan|mayıs|haziran|temmuz|ağustos|eylül|ekim)\s+ayı\s+.*takvimi',venue,re.I):return ''
+    # This historical exhibit label was incorrectly extracted as the venue of
+    # the citywide 700th-anniversary program in the V14.3 live output.
+    if 'fethi' in title.casefold() and '700' in title and 'ilk teleferik' in venue.casefold().replace('ı','i').replace('̇',''):return ''
+    return venue
+
 def make(title,start,url,source,category='',venue='',district='',image='',end=None):
     title=clean(title)
+    if 'bursa.bel.tr' in source and district!='İnegöl':venue=safe_bursa_venue(title,venue)
     if not title or len(title)<6 or not start or not url.startswith('https://'):return None
     now=dt.datetime.now(TZ)
     if not now-dt.timedelta(days=1)<=start<=now+dt.timedelta(days=365) and not (end and now<=end<=now+dt.timedelta(days=365)):return None
