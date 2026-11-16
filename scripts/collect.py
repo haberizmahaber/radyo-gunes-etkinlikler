@@ -22,7 +22,7 @@ def clean(s):
 
 class Parser(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False; self.images=[]; self.stack=[]; self.cards=[]; self.anchor_stack=[]; self.anchor_images={}
+        super().__init__(); self.links=[]; self.link=None; self.text=[]; self.scripts=[]; self.script=False; self.buf=[]; self.meta={}; self.title=''; self.in_title=False; self.images=[]; self.stack=[]; self.cards=[]; self.anchor_stack=[]; self.anchor_images={}; self.visible_chunks=[]
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
         if tag=='a' and a.get('href'):
@@ -63,6 +63,7 @@ class Parser(HTMLParser):
             if key and a.get('content'): self.meta[key.lower()]=a['content']
         if tag=='title': self.in_title=True
     def handle_data(self, data):
+        if not self.script and clean(data): self.visible_chunks.append(clean(data))
         if self.link is not None: self.text.append(data)
         if self.script: self.buf.append(data)
         if self.in_title: self.title+=data
@@ -249,6 +250,30 @@ def structured_venue(detail):
     return ''
 
 
+def bursa_date_adjacent_venue(detail):
+    """Bursa detail header: category, date range, then venue as separate text nodes.
+    Reject generic city names, category labels, prose and navigation.
+    """
+    if detail is None:return ''
+    chunks=detail.visible_chunks
+    date_pattern=re.compile(r'^\d{2}\.\d{2}\.20\d{2}(?:\s*[-–]\s*\d{2}\.\d{2}\.20\d{2})?$')
+    for i,chunk in enumerate(chunks):
+        if not date_pattern.fullmatch(chunk):continue
+        # Header date occurs close to the event heading, not in unrelated cards.
+        nearby=' '.join(chunks[max(0,i-5):i])
+        if not any(clean(detail.meta.get('og:title','')).split('|')[0].casefold() in nearby.casefold() for _ in [0] if detail.meta.get('og:title')):
+            # Some themes omit OG title from the visible heading; compare page title.
+            heading=clean(detail.title).split('|')[0]
+            if not heading or heading.casefold() not in nearby.casefold():continue
+        for value in chunks[i+1:i+3]:
+            value=clean(value)
+            if value in ('Bursa','BURSA','İnegöl','Osmangazi','Nilüfer','Yıldırım'):return ''
+            if value in ('Konser','Sergi','Atölye','Panel-Söyleşi','Festival','Tiyatro','Etkinlik'):continue
+            if 4<=len(value)<=110 and len(value.split())<=12 and not re.search(r'\d{2}\.\d{2}\.20\d{2}|https?://|[.!?]$',value):
+                return value
+            return ''
+    return ''
+
 def make(title,start,url,source,category='',venue='',district='',image='',end=None):
     title=clean(title)
     if not title or len(title)<6 or not start or not url.startswith('https://'):return None
@@ -355,6 +380,7 @@ def collect():
                 for c in ('Konser','Sergi','Atölye','Panel-Söyleşi','Festival','Tiyatro','Konferans'):
                     if re.search(r'(?<!\w)'+re.escape(c)+r'(?!\w)',card['text'],re.I):category=c;break
                 venue=structured_venue(detail)
+                if not venue:venue=bursa_date_adjacent_venue(detail)
                 if not venue:venue=explicit_venue(card.get('text',''))
                 if not venue:venue=explicit_venue(detail.meta.get('og:description','') or detail.meta.get('description',''))
                 image=best_image(detail,url)
