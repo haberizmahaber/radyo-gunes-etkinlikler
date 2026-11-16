@@ -219,16 +219,34 @@ def inegol_display_fields(title):
     # Ticketing and age conditions are kept in the source URL, not invented.
     title=re.sub(r'\s+(?:ÜCRETSİZ|Ücretsiz)\s+BİLETLİ\s*(?:\+\s*\d+)?\s*$', '', title, flags=re.I).strip()
     title=re.sub(r'\s+\d+\s*[-–]\s*\d+\s+Yaş\s+Ücretsiz\s+Biletli\s*$', '', title, flags=re.I).strip()
+    # Normalize decorative double apostrophes around quoted play names.
+    title=re.sub(r"'{2,}([^']+)'{2,}", r'“\1”', title)
+    title=re.sub(r'\s+', ' ', title).strip()
     return title or clean(title), venue
 
 
 def explicit_venue(text):
-    """Use only a clearly labelled venue; avoid swallowing neighbouring fields."""
-    m=re.search(r'(?:^|[\n|])\s*(?:Yer|Mekân|Mekan|Etkinlik Yeri)\s*:\s*([^\n|]{3,120})', text, re.I)
+    """Extract only labelled locations, never infer a venue from a title."""
+    if not isinstance(text,str):return ''
+    # Metadata is often a single line, while cards may use pipe separators.
+    m=re.search(r'(?:^|[\n|;•]|\s{2,})\s*(?:Yer(?:i)?|Mekân|Mekan|Etkinlik Yeri|Konum|Salon|Adres)\s*[:：]\s*([^\n|;•]{3,120})',text,re.I)
     if not m:return ''
     value=clean(m.group(1))
-    value=re.split(r'\s+(?:Tarih|Saat|Kategori|Bilet)\s*:',value,maxsplit=1,flags=re.I)[0].strip()
+    value=re.split(r'\s+(?:Tarih|Saat|Kategori|Bilet|Başlangıç|Bitiş)\s*[:：]',value,maxsplit=1,flags=re.I)[0].strip(' -–.,')
+    if not value or re.search(r'https?://|www\.|\d{2}\.\d{2}\.20\d{2}',value,re.I):return ''
     return value[:120]
+
+
+def structured_venue(detail):
+    """Use event-specific schema.org location only if explicitly present."""
+    if detail is None:return ''
+    for obj in jsonld_events(detail):
+        loc=obj.get('location')
+        if isinstance(loc,list):loc=next((x for x in loc if isinstance(x,dict)),None)
+        if not isinstance(loc,dict):continue
+        name=loc.get('name','')
+        if isinstance(name,str) and 3<=len(clean(name))<=120:return clean(name)
+    return ''
 
 
 def make(title,start,url,source,category='',venue='',district='',image='',end=None):
@@ -336,9 +354,9 @@ def collect():
                 category='Kültür & Sanat'
                 for c in ('Konser','Sergi','Atölye','Panel-Söyleşi','Festival','Tiyatro','Konferans'):
                     if re.search(r'(?<!\w)'+re.escape(c)+r'(?!\w)',card['text'],re.I):category=c;break
-                venue=explicit_venue(card.get('text',''))
-                if not venue:
-                    venue=explicit_venue(detail.meta.get('og:description','') or detail.meta.get('description',''))
+                venue=structured_venue(detail)
+                if not venue:venue=explicit_venue(card.get('text',''))
+                if not venue:venue=explicit_venue(detail.meta.get('og:description','') or detail.meta.get('description',''))
                 image=best_image(detail,url)
                 if not image:
                     for src,alt in card['images']:
