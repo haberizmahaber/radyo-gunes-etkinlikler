@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T05:17:32.891177+00:00",
+  "updated_at": "2026-11-18T05:20:23.751002+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -54,19 +54,6 @@
       "end": "2027-05-08T23:59:00+03:00"
     },
     {
-      "id": "b8feb7a09214ff0e3667",
-      "title": "Bursa Oda Orkestrası Sanatçılarını Arıyor",
-      "start": "2026-10-15T12:00:00+03:00",
-      "venue": "Merinos AKKM",
-      "city": "Bursa",
-      "district": "",
-      "category": "Kültür & Sanat",
-      "url": "https://www.bursa.bel.tr/etkinlik/bursa-oda-orkestrasi-sanatcilarini-ariyor",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/etkinlik/15sisucxk0iook4.jpg",
-      "end": "2026-11-17T23:59:00+03:00"
-    },
-    {
       "id": "3164b96d7975d53a7f86",
       "title": "Bursa’nın Cumhuriyet Albümü: Bir Kentin Ortak Hafızası” fotoğraf sergisi",
       "start": "2026-10-28T12:00:00+03:00",
@@ -119,19 +106,6 @@
       "end": "2026-11-23T23:59:00+03:00"
     },
     {
-      "id": "9ce93e2f5b426abf7d7b",
-      "title": "Yücel Paşmakçı Ahde Vefa Konseri",
-      "start": "2026-11-10T12:00:00+03:00",
-      "venue": "Merinos AKKM Osmangazi Salonu",
-      "city": "Bursa",
-      "district": "",
-      "category": "Konser",
-      "url": "https://www.bursa.bel.tr/etkinlik/yucel-pasmakci-ahde-vefa-konseri",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M72A2T7R2SG7CZKN518P836V.jpg",
-      "end": "2026-11-17T23:59:00+03:00"
-    },
-    {
       "id": "81ae44a8c42cf4be9cfa",
       "title": "Bursa Müze de Kasım Ara Tatili",
       "start": "2026-11-10T12:00:00+03:00",
@@ -169,6 +143,19 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7HDWJMZ3KHAW5QNJ0W7NDVV.jpeg",
       "end": "2026-11-23T23:59:00+03:00"
+    },
+    {
+      "id": "8de8a79843b38dfa776e",
+      "title": "Çalgıcı Mektebi Roman Orkestrası Sezona Merhaba Konseri",
+      "start": "2026-11-17T12:00:00+03:00",
+      "venue": "Merinos AKKM",
+      "city": "Bursa",
+      "district": "",
+      "category": "Konser",
+      "url": "https://www.bursa.bel.tr/etkinlik/calgici-mektebi-roman-orkestrasi-sezona-merhaba-konseri",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7MS4QMHNDJKC7NR1W4ZVH1H.jpg",
+      "end": "2026-11-22T23:59:00+03:00"
     },
     {
       "id": "10fbf4aea2dda5bb87c8",
