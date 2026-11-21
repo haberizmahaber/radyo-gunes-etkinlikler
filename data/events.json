@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T05:21:51.719577+00:00",
+  "updated_at": "2026-11-21T05:13:58.069645+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -119,19 +119,6 @@
       "end": "2026-11-22T23:59:00+03:00"
     },
     {
-      "id": "7814351bfa17ac141db0",
-      "title": "Meydan Kadınların",
-      "start": "2026-11-12T12:00:00+03:00",
-      "venue": "Gazi Orhan Parkı",
-      "city": "Bursa",
-      "district": "",
-      "category": "Kültür & Sanat",
-      "url": "https://www.bursa.bel.tr/etkinlik/meydan-kadinlarin-2",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M79NS29D2GX31YFHGR34B7E7.jpeg",
-      "end": "2026-11-20T23:59:00+03:00"
-    },
-    {
       "id": "5e60d4af29d4c314e558",
       "title": "2026 Ara Tatil Etkinlik Takvimimiz hazır!",
       "start": "2026-11-15T12:00:00+03:00",
@@ -171,6 +158,45 @@
       "end": "2026-11-21T23:59:00+03:00"
     },
     {
+      "id": "ec907ac5f19790ca7275",
+      "title": "Serkan Özarslan Yönetmen Söyleşisi - Tayyare Pazar Sineması",
+      "start": "2026-11-20T12:00:00+03:00",
+      "venue": "Tayyare Kültür Merkezi",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/serkan-ozarslan-ile-soylesi-tayyare-pazar-sinemasi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WEG66AS5ZDWJF2BNKQG3WP.jpg",
+      "end": "2026-11-22T23:59:00+03:00"
+    },
+    {
+      "id": "4b1019870c6f0440b114",
+      "title": "Geçmişin Kokusu - Tayyare Pazar Sineması",
+      "start": "2026-11-20T12:00:00+03:00",
+      "venue": "Tayyare Kültür Merkezi",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/gecmisin-kokusu-tayyare-pazar-sinemasi",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WE1S5D05PSF7N6XZGZDJDN.jpg",
+      "end": "2026-11-22T23:59:00+03:00"
+    },
+    {
+      "id": "050f77dd5088e10e8926",
+      "title": "Hayat, Edebiyat ve Düşünce Buluşmaları: İnsana Dair \"Derdim Bana Derman İmiş\" Serdar Tuncer - Dr. Ömer Demirbağ",
+      "start": "2026-11-20T12:00:00+03:00",
+      "venue": "Tayyare Kültür Merkezi",
+      "city": "Bursa",
+      "district": "",
+      "category": "Panel-Söyleşi",
+      "url": "https://www.bursa.bel.tr/etkinlik/hayat-edebiyat-ve-dusunce-bulusmalari-insana-dair-derdim-bana-derman-imis",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WDTTMAJ323WC0Y6W1FR0QF.jpeg",
+      "end": "2026-11-25T23:59:00+03:00"
+    },
+    {
       "id": "10fbf4aea2dda5bb87c8",
       "title": "İki Bavul Dolusu Çocuk Tiyatro Oyunu 5-12 Yaş",
       "start": "2026-11-21T14:00:00+03:00",
@@ -194,6 +220,19 @@
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13",
       "source": "https://www.inegol.bel.tr/etkinlikler",
       "image": "https://www.inegol.bel.tr/uploads/2026/11/11/c926eda52350d63b3e087fa77c8ed35091277cf0.png",
+      "end": ""
+    },
+    {
+      "id": "6906ba564d7a35727154",
+      "title": "Kayıp Sayfa Çocuk Tiyatro Oyunu 5-12 Yaş",
+      "start": "2026-11-28T14:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kayip-sayfa-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/11/e4b3895073ab4eb6d8c917abe22ec08bd62655f7.png",
       "end": ""
     }
   ]
