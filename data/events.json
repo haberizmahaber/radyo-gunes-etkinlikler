@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T05:13:58.069645+00:00",
+  "updated_at": "2026-11-22T05:16:27.818157+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -143,19 +143,6 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7MS4QMHNDJKC7NR1W4ZVH1H.jpg",
       "end": "2026-11-22T23:59:00+03:00"
-    },
-    {
-      "id": "b373d2f9a8b648138f42",
-      "title": "700. Yıl Söyleşileri",
-      "start": "2026-11-19T12:00:00+03:00",
-      "venue": "Tayyare Kültür Merkezi",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/700-yil-soylesileri",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7S95PMZW3BEQBHPCGAFH3G2.jpeg",
-      "end": "2026-11-21T23:59:00+03:00"
     },
     {
       "id": "ec907ac5f19790ca7275",
