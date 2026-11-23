@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T05:16:27.818157+00:00",
+  "updated_at": "2026-11-23T05:36:05.349651+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -106,19 +106,6 @@
       "end": "2026-11-23T23:59:00+03:00"
     },
     {
-      "id": "81ae44a8c42cf4be9cfa",
-      "title": "Bursa Müze de Kasım Ara Tatili",
-      "start": "2026-11-10T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Atölye",
-      "url": "https://www.bursa.bel.tr/etkinlik/bursa-muze-de-kasim-ara-tatili",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M72TESYQMAWMN01ZF3N14EW6.jpeg",
-      "end": "2026-11-22T23:59:00+03:00"
-    },
-    {
       "id": "5e60d4af29d4c314e558",
       "title": "2026 Ara Tatil Etkinlik Takvimimiz hazır!",
       "start": "2026-11-15T12:00:00+03:00",
@@ -132,45 +119,6 @@
       "end": "2026-11-23T23:59:00+03:00"
     },
     {
-      "id": "8de8a79843b38dfa776e",
-      "title": "Çalgıcı Mektebi Roman Orkestrası Sezona Merhaba Konseri",
-      "start": "2026-11-17T12:00:00+03:00",
-      "venue": "Merinos AKKM",
-      "city": "Bursa",
-      "district": "",
-      "category": "Konser",
-      "url": "https://www.bursa.bel.tr/etkinlik/calgici-mektebi-roman-orkestrasi-sezona-merhaba-konseri",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7MS4QMHNDJKC7NR1W4ZVH1H.jpg",
-      "end": "2026-11-22T23:59:00+03:00"
-    },
-    {
-      "id": "ec907ac5f19790ca7275",
-      "title": "Serkan Özarslan Yönetmen Söyleşisi - Tayyare Pazar Sineması",
-      "start": "2026-11-20T12:00:00+03:00",
-      "venue": "Tayyare Kültür Merkezi",
-      "city": "Bursa",
-      "district": "",
-      "category": "Kültür & Sanat",
-      "url": "https://www.bursa.bel.tr/etkinlik/serkan-ozarslan-ile-soylesi-tayyare-pazar-sinemasi",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WEG66AS5ZDWJF2BNKQG3WP.jpg",
-      "end": "2026-11-22T23:59:00+03:00"
-    },
-    {
-      "id": "4b1019870c6f0440b114",
-      "title": "Geçmişin Kokusu - Tayyare Pazar Sineması",
-      "start": "2026-11-20T12:00:00+03:00",
-      "venue": "Tayyare Kültür Merkezi",
-      "city": "Bursa",
-      "district": "",
-      "category": "Kültür & Sanat",
-      "url": "https://www.bursa.bel.tr/etkinlik/gecmisin-kokusu-tayyare-pazar-sinemasi",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WE1S5D05PSF7N6XZGZDJDN.jpg",
-      "end": "2026-11-22T23:59:00+03:00"
-    },
-    {
       "id": "050f77dd5088e10e8926",
       "title": "Hayat, Edebiyat ve Düşünce Buluşmaları: İnsana Dair \"Derdim Bana Derman İmiş\" Serdar Tuncer - Dr. Ömer Demirbağ",
       "start": "2026-11-20T12:00:00+03:00",
@@ -182,19 +130,6 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WDTTMAJ323WC0Y6W1FR0QF.jpeg",
       "end": "2026-11-25T23:59:00+03:00"
-    },
-    {
-      "id": "10fbf4aea2dda5bb87c8",
-      "title": "İki Bavul Dolusu Çocuk Tiyatro Oyunu 5-12 Yaş",
-      "start": "2026-11-21T14:00:00+03:00",
-      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
-      "city": "Bursa",
-      "district": "İnegöl",
-      "category": "Tiyatro",
-      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-iki-bavul-dolusu-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
-      "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "https://www.inegol.bel.tr/uploads/2026/11/11/311c8d1b7b77a051756fe25dde25a71bd3bb7bea.png",
-      "end": ""
     },
     {
       "id": "8b15901fc18a3945c148",
