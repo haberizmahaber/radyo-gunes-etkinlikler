@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T05:36:05.349651+00:00",
+  "updated_at": "2026-11-24T05:25:08.184025+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -93,32 +93,6 @@
       "end": "2026-12-01T23:59:00+03:00"
     },
     {
-      "id": "9c684339fabd96149737",
-      "title": "AHISKA TÜRKLERİ SÜRGÜNÜNÜN 82. YILI ANMA PROGRAMI",
-      "start": "2026-11-05T12:00:00+03:00",
-      "venue": "Bursa Göç Tarihi Müzesi",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/ahiska-turkleri-surgununun-82-yili-anma-programi",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6NP23TBPK62ZH63KQTTKQKD.jpeg",
-      "end": "2026-11-23T23:59:00+03:00"
-    },
-    {
-      "id": "5e60d4af29d4c314e558",
-      "title": "2026 Ara Tatil Etkinlik Takvimimiz hazır!",
-      "start": "2026-11-15T12:00:00+03:00",
-      "venue": "",
-      "city": "Bursa",
-      "district": "",
-      "category": "Kültür & Sanat",
-      "url": "https://www.bursa.bel.tr/etkinlik/ara-tatil-etkinlik-takvimi",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7HDWJMZ3KHAW5QNJ0W7NDVV.jpeg",
-      "end": "2026-11-23T23:59:00+03:00"
-    },
-    {
       "id": "050f77dd5088e10e8926",
       "title": "Hayat, Edebiyat ve Düşünce Buluşmaları: İnsana Dair \"Derdim Bana Derman İmiş\" Serdar Tuncer - Dr. Ömer Demirbağ",
       "start": "2026-11-20T12:00:00+03:00",
@@ -155,6 +129,84 @@
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kayip-sayfa-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
       "source": "https://www.inegol.bel.tr/etkinlikler",
       "image": "https://www.inegol.bel.tr/uploads/2026/11/11/e4b3895073ab4eb6d8c917abe22ec08bd62655f7.png",
+      "end": ""
+    },
+    {
+      "id": "0b8a3246e794018b69ea",
+      "title": "Son Durak Yetişkin Tiyatro Oyunu",
+      "start": "2026-12-09T20:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-son-durak-yetiskin-tiyatro-oyunu-ucretsiz-biletli-2",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/cbf3091c7a122b6ca7e181d30a85b91e57f153ad.png",
+      "end": ""
+    },
+    {
+      "id": "8e1ba3cba989969e613a",
+      "title": "İki Bavul Dolusu Çocuk Tiyatro Oyunu 5-12 Yaş",
+      "start": "2026-12-12T14:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-iki-bavul-dolusu-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli-2",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/ba0fae8bc10eccd3690fe60d729b4bafc1771df7.png",
+      "end": ""
+    },
+    {
+      "id": "5f212c9b05e7fb4a4522",
+      "title": "Bursa Şehir Tiyatrosu Sersem Kocanın Kurnaz Karısı Yetişkin Tiyatro Oyunu",
+      "start": "2026-12-16T20:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/bursa-sehir-tiyatrosu-sersem-kocanin-kurnaz-karisi-yetiskin-tiyatro-oyunu-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/39a1fbc6b35a87b02fdee5978716256f349ebe01.png",
+      "end": ""
+    },
+    {
+      "id": "c695bd94f825fb73780a",
+      "title": "Genel İnegöl Belediyesi Türk Sanat Müziği Korosu Konseri",
+      "start": "2026-12-18T20:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Kültür & Sanat",
+      "url": "https://www.inegol.bel.tr/etkinlik/konser/inegol-belediyesi-turk-sanat-muzigi-korosu-konseri-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/01e3f10707811efbf0b64f6bedf9f7bddd6b651f.png",
+      "end": ""
+    },
+    {
+      "id": "c4f7da9182acfc8b75f0",
+      "title": "Eyvah Geç Kaldım Çocuk Tiyatro Oyunu 5-12 Yaş",
+      "start": "2026-12-19T14:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/eyvah-gec-kaldim-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/55e26f3ebf807e1f44dce4656986fa7b3690eaba.png",
+      "end": ""
+    },
+    {
+      "id": "1e8ee38174fa72cc65ba",
+      "title": "“Kadın Sığınağı” Yetişkin Tiyatro Oyunu",
+      "start": "2026-12-23T20:00:00+03:00",
+      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13-3",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/23/4864126a0940a15a503839e66de0472029ebaec7.png",
       "end": ""
     }
   ]
