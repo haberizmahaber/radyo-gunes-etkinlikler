@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T05:27:37.408769+00:00",
+  "updated_at": "2026-11-26T05:28:02.542500+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -93,19 +93,6 @@
       "end": "2026-12-01T23:59:00+03:00"
     },
     {
-      "id": "050f77dd5088e10e8926",
-      "title": "Hayat, Edebiyat ve Düşünce Buluşmaları: İnsana Dair \"Derdim Bana Derman İmiş\" Serdar Tuncer - Dr. Ömer Demirbağ",
-      "start": "2026-11-20T12:00:00+03:00",
-      "venue": "Tayyare Kültür Merkezi",
-      "city": "Bursa",
-      "district": "",
-      "category": "Panel-Söyleşi",
-      "url": "https://www.bursa.bel.tr/etkinlik/hayat-edebiyat-ve-dusunce-bulusmalari-insana-dair-derdim-bana-derman-imis",
-      "source": "https://www.bursa.bel.tr/etkinlik",
-      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M7WDTTMAJ323WC0Y6W1FR0QF.jpeg",
-      "end": "2026-11-25T23:59:00+03:00"
-    },
-    {
       "id": "8b15901fc18a3945c148",
       "title": "“Kadın Sığınağı” Yetişkin Tiyatro Oyunu",
       "start": "2026-11-25T20:00:00+03:00",
@@ -129,6 +116,84 @@
       "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kayip-sayfa-cocuk-tiyatro-oyunu-5-12-yas-ucretsiz-biletli",
       "source": "https://www.inegol.bel.tr/etkinlikler",
       "image": "https://www.inegol.bel.tr/uploads/2026/11/11/e4b3895073ab4eb6d8c917abe22ec08bd62655f7.png",
+      "end": ""
+    },
+    {
+      "id": "27fd0c05d7de58244c25",
+      "title": "Genel İnegöl Belediyesi 2. Tiyatro Festivali Onur AYAN ile Doğaçlama Atölyesi İnegöl Belediyesi Kültür Sanat ve Gençlik Merkezi",
+      "start": "2026-12-02T16:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Kültür & Sanat",
+      "url": "https://www.inegol.bel.tr/etkinlik/atolye/inegol-belediyesi-2-tiyatro-festivali-onur-ayan-ile-dogaclama-atolyesi",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/a5970f1b6f54147643e75f8c5482b33d7ed298cb.png",
+      "end": ""
+    },
+    {
+      "id": "1f3dac08a9ce7ea93946",
+      "title": "İnegöl Belediyesi 2. Tiyatro Festivali Nazif Uslu ile Metinden Rejiye Geçiş Atölyesi İnegöl Belediyesi Kültür Sanat ve Gençlik Merkezi",
+      "start": "2026-12-02T16:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-2-tiyatro-festivali-nazif-uslu-ile-metinden-rejiye-gecis-atolyesi",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/40cd3fe172c809db30d7e3d77803a40b61b7ea9d.png",
+      "end": ""
+    },
+    {
+      "id": "d1f4f979cd43e7bd9ab2",
+      "title": "Genel İnegöl Belediyesi 2. Tiyatro Festivali İzabella Muzurbaeva ile Beden ve Aksiyon Atölyesi İnegöl Belediyesi Kapalı Spor Salonu",
+      "start": "2026-12-02T16:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Kültür & Sanat",
+      "url": "https://www.inegol.bel.tr/etkinlik/atolye/inegol-belediyesi-2-tiyatro-festivali-izabella-muzurbaeva-ile-beden-ve-aksiyon-atolyesi",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/5f16ac2f22a7519fb0865b9ffc3de2fbb8ddf5ac.png",
+      "end": ""
+    },
+    {
+      "id": "aeb4cdae0fd2e6f8c9d4",
+      "title": "İnegöl Belediyesi 2. Tiyatro Festivali Genç Meddahlar Gösterisi Bilalköy",
+      "start": "2026-12-02T18:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-2-tiyatro-festivali-genc-meddahlar-gosterisi",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/e97618de7a125352a0928fed29ccfa0e67d1cd20.png",
+      "end": ""
+    },
+    {
+      "id": "66db5de0971da1fe3629",
+      "title": "İnegöl Belediyesi 2. Tiyatro Festivali Kuvayi Milliye Destanı Yetişkin Tiyatro Oyunu İnegöl Belediyesi Kent Müzesi",
+      "start": "2026-12-04T17:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-2-tiyatro-festivali-kuvayi-milliye-destani-yetiskin-tiyatro-oyunu",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/c85a9f86461ec94b4ce9f1ea67c27430ec0f7f45.png",
+      "end": ""
+    },
+    {
+      "id": "845404cc6d54892e2876",
+      "title": "İnegöl Belediyesi 2. Tiyatro Festivali Sokak Tiyatrosu İnegöl Belediyesi Merkez Parkı",
+      "start": "2026-12-05T17:00:00+03:00",
+      "venue": "",
+      "city": "Bursa",
+      "district": "İnegöl",
+      "category": "Tiyatro",
+      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-2-tiyatro-festivali-sokak-tiyatrosu",
+      "source": "https://www.inegol.bel.tr/etkinlikler",
+      "image": "https://www.inegol.bel.tr/uploads/2026/11/25/e97b1803fcf55788a7e22f45b8823a5d8ea1b953.png",
       "end": ""
     },
     {
