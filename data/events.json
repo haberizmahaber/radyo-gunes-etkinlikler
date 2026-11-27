@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T05:28:02.542500+00:00",
+  "updated_at": "2026-11-27T05:28:36.536787+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -91,19 +91,6 @@
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6E664N237Y0RJ4M9QWWF1JW.jpeg",
       "end": "2026-12-01T23:59:00+03:00"
-    },
-    {
-      "id": "8b15901fc18a3945c148",
-      "title": "“Kadın Sığınağı” Yetişkin Tiyatro Oyunu",
-      "start": "2026-11-25T20:00:00+03:00",
-      "venue": "Beşinci Mevsim Kültür Sanat Merkezi",
-      "city": "Bursa",
-      "district": "İnegöl",
-      "category": "Tiyatro",
-      "url": "https://www.inegol.bel.tr/etkinlik/tiyatro/inegol-belediyesi-sehir-tiyatrosu-kadin-siginagi-yetiskin-tiyatro-oyunu-ucretsiz-biletli-13",
-      "source": "https://www.inegol.bel.tr/etkinlikler",
-      "image": "https://www.inegol.bel.tr/uploads/2026/11/11/c926eda52350d63b3e087fa77c8ed35091277cf0.png",
-      "end": ""
     },
     {
       "id": "6906ba564d7a35727154",
