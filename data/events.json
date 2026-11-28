@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T05:28:36.536787+00:00",
+  "updated_at": "2026-11-28T05:20:34.612740+00:00",
   "events": [
     {
       "id": "46b8bdd4ca81f2a43482",
@@ -90,6 +90,32 @@
       "url": "https://www.bursa.bel.tr/etkinlik/kasim-ayi-etkinlik-takvimi-2",
       "source": "https://www.bursa.bel.tr/etkinlik",
       "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M6E664N237Y0RJ4M9QWWF1JW.jpeg",
+      "end": "2026-12-01T23:59:00+03:00"
+    },
+    {
+      "id": "b2206c481645a6e8876e",
+      "title": "Atomize Dünyanın Hücrelerinde Olup Bitenler - Sosyoloji Konuşmaları",
+      "start": "2026-11-23T12:00:00+03:00",
+      "venue": "Tayyare Kültür Merkezi",
+      "city": "Bursa",
+      "district": "",
+      "category": "Kültür & Sanat",
+      "url": "https://www.bursa.bel.tr/etkinlik/atomize-dunyanin-hucrelerinde-olup-bitenler-sosyoloji-konusmalari",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M8ECXS1Z74G2XCMJCSW1CTRV.jpeg",
+      "end": "2026-11-28T23:59:00+03:00"
+    },
+    {
+      "id": "096ff514fee97596c47a",
+      "title": "Gökyüzünde Bir Yıldız, Gönüllerde Bir Güneş: Zeki Müren Anma Konseri",
+      "start": "2026-11-27T12:00:00+03:00",
+      "venue": "Merinos AKKM",
+      "city": "Bursa",
+      "district": "",
+      "category": "Konser",
+      "url": "https://www.bursa.bel.tr/etkinlik/gokyuzunde-bir-yildiz-gonullerde-bir-gunes-zeki-muren-anma-konseri",
+      "source": "https://www.bursa.bel.tr/etkinlik",
+      "image": "https://www.bursa.bel.tr/storage/medya/2026/11/01M88PKDZX3CHKM1YJGMA2WDMW.jpg",
       "end": "2026-12-01T23:59:00+03:00"
     },
     {
